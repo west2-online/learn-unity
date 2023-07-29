@@ -1,5 +1,11 @@
 # 这是一个关于游戏图形程序的介绍
-（正在完善哈，现在是AI版本哈）
+
+# 游戏图形程序学习
+## 初阶学习
+[Hi Shader(人美声甜的unity小姐姐，倾情推荐哈)](https://learn.u3d.cn/tutorial/hi-shader?chapterId=63562b25edca72001f21d009#62fa1103a77d45001f9045d9)
+
+## 进阶学习
+[Games101(建议把闫令琪老师的课程都看完哈)](https://www.bilibili.com/video/BV1X7411F744/?share_source=copy_web&vd_source=92d7da6ab7e3822b237fe3668cb3f2b1)
 
 ###  游戏的图形程序是游戏开发中负责处理游戏图形渲染和显示的部分。它是游戏引擎的一个重要组成部分，负责将游戏中的虚拟世界、角色、场景等元素以图像的形式呈现在屏幕上，供玩家观看和互动。
 
