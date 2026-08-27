@@ -1,0 +1,134 @@
+# UE‑Learning‑Round‑Exam
+
+> 
+> UE 学习轮考核 | Unreal Engine 5 考核试卷
+> 二选一完成：**理论卷(A)** / **实践卷(B)**，允许 AI 辅助，看重思考与解决问题能力
+
+---
+
+## 📋 考核总览
+
+| 项目 | 说明 |
+| --- | --- |
+| 引擎版本 | UE 5.0 + |
+| 允许工具 | 官方文档、搜索引擎、AI 辅助 |
+| 考核重点 | 理解程度、工程思维、问题排查能力，不侧重死记硬背 |
+| 完成规则 | **两套试卷二选一提交即可**   • 试卷A（理论卷）：完成 一、二、三 大题   • 试卷B（实践卷）：完成综合实操 + 实践卷附加小问 |
+
+---
+
+## 📄 试卷 A｜理论卷
+
+### 一、基础概念题
+
+1. 在UE的C++中，`int`、`float`、`bool`、`FString`分别用来存储什么类型的数据？蓝图中与之对应的变量类型叫什么？
+2. 什么是变量？为什么开发中需要使用变量？请分别简述**C++**和**蓝图**中如何声明与初始化变量。
+3. 虚幻蓝图中有`LoopFor`（for循环）和`LoopWhile`（while循环），请说明两种循环的区别，各自适合什么场景？C++层面`for`与`while`循环区别是否一致？
+4. UE中C++提供哪些条件判断语句？蓝图中对应的判断节点有哪些？写出C++的基础语法结构，同时写出蓝图节点名称。
+5. 什么是函数（Function）？C++一个函数由哪几个部分组成？`void`代表什么含义？蓝图中的函数（Function）和宏（Macro）有什么简单区别？
+6. 面向对象三大特性是什么？简单说说这三大特性在UE游戏开发（C++/蓝图）中的直观表现。
+
+---
+
+### 二、UE C++类与面向对象
+
+> 
+> 参考下面的`ACreature`角色类代码，完成1‑6小题
+
+```
+#include "Creature.h"
+
+UCLASS()
+class TEST_API ACreature : public AActor
+{
+    GENERATED_BODY()
+
+private:
+    FString CreatureName;
+    int32 Health;
+
+public:
+    UPROPERTY(EditAnywhere)
+    int32 HP;
+
+    ACreature();
+
+    UFUNCTION(BlueprintCallable)
+    void TakeDamage(int32 DamageValue);
+};
+```
+
+1. 代码中`CreatureName`、`Health`称作什么成员？`HP`被`UPROPERTY()`包裹，和普通C++成员变量相比有什么好处？
+2. `ACreature();`是什么？它什么时候会被执行调用？
+3. `TakeDamage`是什么函数？`UFUNCTION(BlueprintCallable)`这个宏的作用是什么？
+4. 代码中的`private`、`public`访问修饰符作用是什么？再写出UE C++中另外两种访问修饰符。
+5. 如果要新建一个`ABoss`类继承自`ACreature`，写出C++类定义继承的关键代码片段。什么条件下`ABoss`可以直接使用父类`ACreature`的成员与函数？
+6. UE C++中`virtual`、`override`、`UCLASS(Blueprintable, BlueprintNativeEvent)`分别有什么作用？
+
+---
+
+### 三、UE核心生命周期与组件
+
+1. UE Actor的生命周期函数中，`BeginPlay()` 和 `ActorConstructor`（构造函数）执行时机有什么区别？蓝图中对应的事件节点叫什么？
+2. `Tick()` 和 `FixedTick`（或者蓝图Tick、固定时间步Tick）调用频率有什么区别？分别适合什么场景？提示：和帧率、物理更新相关。
+3. UE中 `GetWorld()->GetDeltaSeconds()` 的含义是什么？在移动逻辑中为什么一定要使用它？
+4. 组件是UE开发基本单元。
+
+(1) 补全C++代码：获取当前Actor身上的`UStaticMeshComponent`组件存入变量`MeshComp`，考虑健壮性（判空）。
+
+```
+UStaticMeshComponent* MeshComp;
+//在BeginPlay中获取组件
+void ACreature::BeginPlay()
+{
+    
+}
+```
+
+> 
+> 思考：把组件保存到成员变量，对比每次调用`GetComponent`实时获取有什么优势？
+
+(2) 写出至少3种在场景中**获取其他Actor/其他Actor组件**的常用方式（C++或者蓝图思路均可）。
+
+---
+
+## 📄 试卷 B｜实践卷（第四大题）
+
+> 
+> 纯实操，在自己 UE5.0+ 工程完成；C++ / 蓝图二选一实现；允许任意文档与AI辅助；看重实现效果与逻辑清晰度。
+
+### 综合实操：移动 + 搭房子 + 门 + 灯
+
+需求：类似简易沙盒，白模搭建小屋，角色移动，门与灯光交互。**4项需求全部完成**。
+
+| 序号 | 模块 | 需求描述 |
+| --- | --- | --- |
+| 🎮 需求1 | 角色移动控制 | 使用新版 **Input Mapping（输入映射系统）** 获取 `MoveForward`（W/S）和 `MoveRight`（A/D）输入。   控制角色（`ACharacter`）在水平面（X/Y）前后左右移动，基础速度 `MoveSpeed = 500.f`。   必须使用 `Delta Seconds`，保证不同帧率移动速度一致。   按住 `LeftShift`：移动速度变为原来0.5倍（慢走）。   按下 `X`：Output Log 打印 `TEXT("Boom!")`。 |
+| 🏠 需求2 | 搭建简易房子 | 使用 BSP几何体 / StaticMesh立方体白模，拼搭简易小屋。   可直接拖拽引擎基础形状，也可以C++/蓝图动态生成。 |
+| 🚪 需求3 | 交互‑开关门 | 小屋墙面放置门模型（可用Cube替代）。   逻辑：玩家距离门小于200单位，按下E；门绕Yaw(Z轴)旋转90°打开；再次按E转回原位关闭。 |
+| 💡 需求4 | 交互‑开关灯 | 在屋内/屋顶放置 PointLight / SpotLight。   按下L键切换灯光开关状态：通过`SetVisibility`或者修改光源Intensity实现开关。 |
+
+---
+
+### ⭐ 实践卷｜附加理论小问（必答）
+
+沿用`ACreature`类背景，统计场景内`ACreature`及其子类实例数量。
+
+> 
+> 在`ACreature`内定义静态成员：`static int32 CreatureCount;`
+
+1. 静态成员与普通实例成员的区别
+2. C++访问静态成员、实例成员语法区别
+3. 蓝图能否直接访问C++静态成员？如果要蓝图可访问，需要添加什么宏？
+
+---
+
+## ✅ 提交规范
+
+| 试卷类型 | 提交内容要求 |
+| --- | --- |
+| 试卷A（理论） | Markdown/文档作答；代码题给出完整可阅读代码片段 |
+| 试卷B（实践） | 1. 写明实现方式：蓝图 / C++   2. 关键代码 / 蓝图截图   3. 功能演示说明（录屏简述运行效果）   4. 完成附加理论小问书面作答 |
+
+> 
+> 🎉 完成任意一套即为通关。报错是正常过程，重点考察排查与解决问题能力。
