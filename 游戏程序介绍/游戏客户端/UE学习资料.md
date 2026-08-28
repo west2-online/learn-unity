@@ -4,8 +4,6 @@
 >
 > 本资料基于 Unreal Engine 5.4 编写。
 
-UE学习资料
-
 ## 前言
 
 本资料面向刚接触游戏开发的同学，主要介绍 UE 开发中的基础概念、常用功能以及常见问题。资料以快速了解和查阅为目的，不作为完整 UE 教程。只看文档不够直观，推荐大家对UE有一个整体了解之后，跟着一个教程，完整做出一个属于自己的游戏，这会对你理解与上手UE非常有帮助。（相信大家作为大学生，在网上找教程自学的能力肯定是有的）
@@ -24,63 +22,63 @@ Unreal Engine（UE）是一款由 Epic Games 开发的游戏引擎，可以用�
 
 在游戏开发中，UE 可以帮助我们完成：
 
-场景制作
+- 场景制作
 
-角色控制
+- 角色控制
 
-动画
+- 动画
 
-UI
+- UI
 
-AI
+- AI
 
-音频
+- 音频
 
-特效
+- 特效
 
-材质
+- 材质
 
-游戏逻辑
+- 游戏逻辑
 
-游戏打包
+- 游戏打包
 
 ## 1.2 UE 项目的基本结构
 
 一个 UE 项目通常包含（在项目文件夹下都可见）：
 
-Content：项目主要资源
+- Content：项目主要资源
 
-Config：项目配置
+- Config：项目配置
 
-Plugins：插件
+- Plugins：插件
 
-Source：C++ 项目代码（如果使用 C++）
+- Source：C++ 项目代码（如果使用 C++）
 
-Saved：运行过程中生成的文件
+- Saved：运行过程中生成的文件
 
-Intermediate：编译过程中产生的临时文件
+- Intermediate：编译过程中产生的临时文件
 
 日常开发中最常接触的是 Content。
 
 ## 1.3 常见编辑器窗口
 
-Viewport：用于查看和编辑当前场景，可以查看场景、移动/旋转/缩放 `Actor`、放置游戏对象。
+- Viewport：用于查看和编辑当前场景，可以查看场景、移动/旋转/缩放 `Actor`、放置游戏对象。
 
-World Outliner：显示当前 `Level` 中的 `Actor`，可以查找、选择和管理场景中的对象。
+- World Outliner：显示当前 `Level` 中的 `Actor`，可以查找、选择和管理场景中的对象。
 
-Details：显示当前选中对象的详细属性，例如 Transform、Mesh、Collision、Material 等。
+- Details：显示当前选中对象的详细属性，例如 `Transform`、`Mesh`、`Collision`、`Material` 等。
 
-`Content Browser`：用于管理项目资源，例如 Blueprint、Material、`Text`ure、Animation、Sound、`Level`。
+- Content Browser：用于管理项目资源，例如 `Blueprint、Material`、`Texture`、`Animation、Sound`、`Level`。
 
-## 1.4 `Level`、World、`Actor`、Component
+## 1.4 Level、World、Actor、Component
 
-World：可以理解为游戏运行的世界。
+- World：可以理解为游戏运行的世界。
 
-`Level`：组成游戏世界的场景，可以理解为游戏中的一张地图或一个场景。
+- Level：组成游戏世界的场景，可以理解为游戏中的一张地图或一个场景。
 
-`Actor`：可以放入 `Level` 中的游戏对象，例如玩家、敌人、NPC、门、道具和灯光。
+- Actor：可以放入 Level 中的游戏对象，例如玩家、敌人、NPC、门、道具和灯光。
 
-Component：`Actor` 的组成部分，用于为 `Actor` 提供具体功能。一个 `Actor` 可以拥有多个Component。
+- Component：Actor 的组成部分，用于为 Actor 提供具体功能。一个 Actor 可以拥有多个 Component。
 
 # 二、Blueprint 蓝图基础
 
@@ -90,35 +88,35 @@ Blueprint（蓝图）是 UE 提供的可视化编程系统。通过蓝图，可�
 
 ## 2.2 常用节点
 
-Event：用于触发一段逻辑，例如 `Event BeginPlay`。
+- Event：用于触发一段逻辑，例如 `Event BeginPlay`。
 
-Variable：用于保存数据，例如 `Health`、`Level`、`IsDead`。
+- Variable：用于保存数据，例如 `Health`、`Level`、`IsDead`。
 
-`Branch`：相当于程序中的 if，根据条件执行不同逻辑。
+- Branch：相当于程序中的 if，根据条件执行不同逻辑。
 
-`Function`：将一段具有独立功能的逻辑封装起来，便于重复使用。
+- Function：将一段具有独立功能的逻辑封装起来，便于重复使用。
 
-`Custom Event`：用于创建自定义事件。
+- Custom Event：用于创建自定义事件。
 
-`Sequence`：按顺序执行多个执行引脚。
+- Sequence：按顺序执行多个执行引脚。
 
-`Loop`：用于重复执行一段逻辑。
+- Loop：用于重复执行一段逻辑。
 
 ## 2.3 Cast
 
-Cast 用于判断一个对象是否属于指定类型，并在成功后访问该类型的内容。
+`Cast` 用于判断一个对象是否属于指定类型，并在成功后访问该类型的内容。
 
-例如：Other `Actor` → Cast To BP_Player → 获取玩家属性。
+例如：Other Actor → Cast To BP_Player → 获取玩家属性。
 
 不要为了访问变量就到处 Cast。如果多个不同类型的对象都需要执行相同功能，可以考虑使用 `Blueprint Interface`。
 
-## 2.4 `Blueprint Interface`
+## 2.4 Blueprint Interface
 
 `Blueprint Interface`（蓝图接口）可以让不同类型的对象拥有统一的功能调用方式。
 
 例如玩家、敌人、NPC、宝箱都可以实现 Interact。这样交互系统就不需要分别判断每种对象的类型。
 
-## 2.5 `Event Dispatcher`
+## 2.5 Event Dispatcher
 
 `Event Dispatcher` 可以理解为一种“事件通知”。
 
@@ -128,33 +126,33 @@ Cast 用于判断一个对象是否属于指定类型，并在成功后访问该
 
 ## 3.1 常见类型
 
-Bool：真假状态，例如 `IsDead`。
+- Bool：真假状态，例如 `IsDead`。
 
-Integer：整数，例如 `Level`。
+- Integer：整数，例如 `Level`。
 
-Float：浮点数，例如 Speed。
+- Float：浮点数，例如 `Speed`。
 
-String / `Text`：文本。
+- String / Text：文本。
 
-Enum：有限的几种状态，例如武器类型、角色状态。
+- Enum：有限的几种状态，例如武器类型、角色状态。
 
-Struct：将多个相关数据组合在一起，例如玩家属性。
+- Struct：将多个相关数据组合在一起，例如玩家属性。
 
-Array：保存多个数据，例如背包物品列表。
+- Array：保存多个数据，例如背包物品列表。
 
-Map：通过 `Key` 查找对应 Value，例如 ItemID → ItemCount。
+- Map：通过 `Key` 查找对应 `Value`，例如 ItemID → ItemCount。
 
-Object Reference：引用一个具体对象。
+- Object Reference：引用一个具体对象。
 
 ## 3.2 简单示例
 
 Enum：
 
-枚举类E_WeaponType中，可以有 `Sword` / `Bow` / `Staff` / `Shield` 等多种分类，他们都属于E_WeaponType的一个类型。
+枚举类`E_WeaponType`中，可以有 `Sword` / `Bow` / `Staff` / `Shield` 等多种分类，他们都属于`E_WeaponType`的一个类型。
 
 Struct：
 
-结构体`PlayerData`中，可以有 `Level` / HP / MaxHP / Stamina / MaxStamina / Attack 等多个属性，每个`PlayerData`都包含各自的这些属性。
+结构体`PlayerData`中，可以有 `Level` / `HP` / `MaxHP` / `Stamina` / `MaxStamina` / `Attack` 等多个属性，每个`PlayerData`都包含各自的这些属性。
 
 Map：
 
@@ -168,15 +166,15 @@ Map：
 
 # 四、常用系统简介
 
-## 4.1 `Character`
+## 4.1 Character
 
-`Character` 是 UE 中专门用于制作角色的 `Actor` 类型。`Character` 通常包含 `Capsule Collision`、`Skeletal Mesh`、``Character` Movement` 和 Camera。
+`Character` 是 UE 中专门用于制作角色的 `Actor` 类型。`Character` 通常包含 `Capsule Collision`、`Skeletal Mesh`、`Character Movement` 和 `Camera`。
 
-``Character` Movement` 是`Character`的一个组件，负责处理角色移动、跳跃、下落等功能。
+`Character Movement` 是`Character`的一个组件，负责处理角色移动、跳跃、下落等功能。
 
 ## 4.2 Animation
 
-常见动画资源包括 Animation `Sequence`、`Animation Blueprint`、`Blend Space` 和 `Montage`。
+常见动画资源包括 `Animation Sequence`、`Animation Blueprint`、`Blend Space` 和 `Montage`。
 
 `Animation Blueprint`：用于控制角色动画状态。
 
@@ -210,7 +208,7 @@ Material 用于控制物体的表面效果。常见输入包括 `Base Color`、`
 
 `3D Sound` 可以根据玩家与声音源之间的距离产生音量变化。
 
-## 4.7 `Niagara`
+## 4.7 Niagara
 
 `Niagara` 是 UE 中用于制作粒子特效的系统，常用于火焰、烟雾、魔法、爆炸、雨雪和环境粒子等效果。
 
@@ -226,13 +224,13 @@ Material 用于控制物体的表面效果。常见输入包括 `Base Color`、`
 
 ## 5.3 获取玩家角色
 
-常见方法：Get Player `Character`。然后根据需要转换为自己的 `Character` 类型。
+常见方法：`Get Player Character`。然后根据需要转换为自己的 `Character` 类型。
 
 ## 5.4 播放音效
 
-可以使用 Play `Sound 2D`、`Play Sound at Location`、Spawn `Sound 2D` 和 `Spawn Sound Attached`，根据声音是否需要空间位置来选择。
+可以使用 `Play Sound 2D`、`Play Sound at Location`、`Spawn Sound 2D` 和 `Spawn Sound Attached`，根据声音是否需要空间位置来选择。
 
-## 5.5 查看 `NavMesh`
+## 5.5 查看 NavMesh
 
 在场景中放置 `Nav Mesh Bounds Volume`，然后按 P 可以显示导航区域。
 
@@ -248,19 +246,19 @@ Material 用于控制物体的表面效果。常见输入包括 `Base Color`、`
 
 排查：
 
-## 1. 变量是否成功赋值
+1. 变量是否成功赋值
 
-## 2. 获取对象的逻辑是否执行
+2. 获取对象的逻辑是否执行
 
-## 3. 对象是否已经被 Destroy
+3. 对象是否已经被 `Destroy`
 
-## 4. 是否在正确的时机访问
+4. 是否在正确的时机访问
 
 ## 6.2 为什么 Cast Failed？
 
 说明尝试转换的对象并不是目标类型。
 
-检查获取到的对象到底是什么，以及是否真的需要 Cast。如果多个对象需要统一功能，可以考虑使用 Interface。
+检查获取到的对象到底是什么，以及是否真的需要 Cast。如果多个对象需要统一功能，可以考虑使用 `Interface`。
 
 ## 6.3 为什么 AI 不移动？
 
@@ -280,65 +278,65 @@ Material 用于控制物体的表面效果。常见输入包括 `Base Color`、`
 
 Move To 失败
 
-## 6.4 `NavMesh` 是绿色的，但敌人还是不移动
+## 6.4 NavMesh 是绿色的，但敌人还是不移动
 
-绿色只代表该区域存在可导航区域，还需要检查 `AI Controller`、`Behavior Tree`、Move To、目标是否有效以及 ``Character` Movement` 是否正常。
+绿色只代表该区域存在可导航区域，还需要检查 `AI Controller`、`Behavior Tree`、`Move To`、目标是否有效以及 `Character Movement` 是否正常。
 
-## 6.5 为什么 `Animation Blueprint` 只有 Idle？
+## 6.5 为什么 Animation Blueprint 只有 Idle？
 
 常见原因：
 
 `Animation Blueprint` 没有正确设置
 
-State Machine 没有切换
+`State Machine` 没有切换
 
 状态切换条件不正确
 
-Speed 等参数没有正确更新
+`Speed` 等参数没有正确更新
 
 `Skeletal Mesh` 使用了错误的 `Animation Blueprint`
 
-Skeleton 不匹配
+`Skeleton` 不匹配
 
-建议使用 `Animation Blueprint` Debug 模式检查当前状态。
+建议使用 `Animation Blueprint Debug` 模式检查当前状态。
 
-## 6.6 为什么 `Montage` 不播放？
+## 6.6 为什么 Montage 不播放？
 
 检查：
 
-## 1. `Montage` 是否使用正确的 Skeleton
+1. `Montage` 是否使用正确的 `Skeleton`
 
-## 2. Slot 是否正确
+2. `Slot` 是否正确
 
-## 3. Anim Graph 中是否存在对应 Slot
+3. `Anim Graph` 中是否存在对应 `Slot`
 
-## 4. `Montage` 是否真的被调用
+4. `Montage` 是否真的被调用
 
-## 5. 播放对象是否正确
+5. 播放对象是否正确
 
 ## 6.7 为什么 Widget 不显示？
 
 检查 `Create Widget` 的返回值是否有效，以及是否执行了 `Add to Viewport`。
 
-如果仍然没有显示，再检查 Widget Visibility、ZOrder、Canvas/Layout，以及是否被其他 UI 遮挡。
+如果仍然没有显示，再检查 `Widget Visibility`、`ZOrder`、`Canvas/Layout`，以及是否被其他 UI 遮挡。
 
 ## 6.8 为什么材质颜色和原来的不一样？
 
 可能原因：
 
-`Text`ure 本身不是最终颜色
+`Texture` 本身不是最终颜色
 
-使用了多个 `Text`ure
+使用了多个 `Texture`
 
 `Base Color` 接线错误
 
-Color Space / sRGB 设置问题
+`Color Space / sRGB` 设置问题
 
-Material 中存在额外颜色计算
+`Material` 中存在额外颜色计算
 
-Lighting 导致视觉上的颜色差异
+`Lighting` 导致视觉上的颜色差异
 
-如果原材质正常，建议先查看原 Material 的节点连接方式。
+如果原材质正常，建议先查看原 `Material` 的节点连接方式。
 
 ## 6.9 为什么声音没有播放？
 
@@ -354,7 +352,7 @@ Lighting 导致视觉上的颜色差异
 
 音量是否为 0
 
-是否被 Sound Concurrency 限制
+是否被 `Sound Concurrency` 限制
 
 3D 声音是否距离太远
 
@@ -384,23 +382,23 @@ SDK / 编译环境问题
 
 命名并没有强制的要求，但是合理规范的命名可以使你的项目井井有条，更好管理；同时其他人接手你的项目时也不用费尽心思去猜，能有效提高工作效率。
 
-## 7.1 常见资源命名
+## 7.1 常见资源命名前缀
 
 BP_：Blueprint
 
-WBP_：`Widget Blueprint`
+WBP_：Widget Blueprint
 
-ABP_：`Animation Blueprint`
+ABP_：Animation Blueprint
 
 M_：Material
 
-MI_：`Material Instance`
+MI_：Material Instance
 
-T_：`Text`ure
+T_：Texture
 
 S_：Sound
 
-NS_：`Niagara` System
+NS_：Niagara System
 
 DA_：Data Asset
 
@@ -416,7 +414,7 @@ DT_：Data Table
 
 Content
 
-├── `Character`s
+├── Characters
 
 ├── Animation
 
@@ -426,7 +424,7 @@ Content
 
 ├── Materials
 
-├── `Text`ures
+├── Textures
 
 ├── VFX
 
@@ -464,11 +462,11 @@ Blueprint
 
 ↓
 
-`Actor` / Component
+Actor / Component
 
 ↓
 
-`Character`
+Character
 
 ↓
 
@@ -484,21 +482,21 @@ UE 的内容非常多，不需要一开始全部学会。
 
 遇到问题时，可以先尝试：
 
-## 1. 查看报错信息
+1. 查看报错信息
 
-## 2. 查看 `Output Log`
+2. 查看 Output Log
 
-## 3. 使用 `Print String`
+3. 使用 Print String
 
-## 4. 使用 `Blueprint Debugger`
+4. 使用 Blueprint Debugger
 
-## 5. 检查变量是否为空
+5. 检查变量是否为空
 
-## 6. 检查节点是否执行
+6. 检查节点是否执行
 
-## 7. 搜索对应问题
+7. 搜索对应问题
 
-## 8. 再向其他成员寻求帮助
+8. 再向其他成员寻求帮助
 
 能够独立定位问题，比记住大量 UE 节点更加重要。
 
