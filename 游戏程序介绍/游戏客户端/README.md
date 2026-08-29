@@ -33,6 +33,11 @@
 ### [unreal初阶学习(非常建议生肉学习哈)](https://www.bilibili.com/video/BV1LP4y1F7yE?spm_id_from=333.337.search-card.all.click)
 ### [unreal进阶学习(说实话能把这个啃下来都是狠人)](https://zhuanlan.zhihu.com/p/22813908)
 
+# 个人博客参考：
+组内的一些游戏开发学习笔记（来自 [rechenz](https://github.com/rechenz) 的博客），可以当作额外的参考：
+### [Unity转UE笔记 长久更新](https://rechenz.github.io/post/unity转ue笔记-长久更新/)
+### [使用vscode进行UE开发指南](https://rechenz.github.io/post/使用vscode进行ue开发指南/)
+
 ## Tip：
 这些是我们提供的部分教程，其实B站和youtube有非常多的高质量的教程，我们能够给你们提供的仅仅是一个参考，换言之是被经验验证过的合适的教程，更重要的其实是你们要学会自己搜索优秀的教程，这个能力远远比学完我们提供的教程获得的收获来的重要
 
